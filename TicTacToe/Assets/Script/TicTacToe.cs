@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class TicTacToeAI : MonoBehaviour
@@ -7,6 +8,7 @@ public class TicTacToeAI : MonoBehaviour
     public Button[] buttons;
     public TextMeshProUGUI gameStatusText;
     public GameObject choicePanel;
+    public GameObject endGamePanel;
 
     private string playerSymbol;
     private string aiSymbol;
@@ -16,6 +18,7 @@ public class TicTacToeAI : MonoBehaviour
     private void Start()
     {
         choicePanel.SetActive(true);
+        endGamePanel.SetActive(false);
         foreach (var button in buttons)
             button.interactable = false;
     }
@@ -38,11 +41,11 @@ public class TicTacToeAI : MonoBehaviour
 
         if (!playerTurn)
         {
-            gameStatusText.text = "AI's Turn";
+            gameStatusText.text = "电脑回合";
             Invoke("AIFirstMove", 0.5f);
         }
         else
-            gameStatusText.text = "Your Turn";
+            gameStatusText.text = "你的回合";
 
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -62,17 +65,18 @@ public class TicTacToeAI : MonoBehaviour
 
         if (CheckWin(playerSymbol))
         {
-            gameStatusText.text = "You Win!";
-            DisableButtons();
+            gameStatusText.text = "你赢了！";
+            EndGame();
         }
         else if (movesCount == 9)
         {
-            gameStatusText.text = "It's a Draw!";
+            gameStatusText.text = "平局";
+            EndGame();
         }
         else
         {
             playerTurn = false;
-            gameStatusText.text = "AI's Turn";
+            gameStatusText.text = "电脑回合";
             Invoke("AIMove", 0.5f);
         }
     }
@@ -98,18 +102,35 @@ public class TicTacToeAI : MonoBehaviour
 
         if (CheckWin(aiSymbol))
         {
-            gameStatusText.text = "AI Wins!";
-            DisableButtons();
+            gameStatusText.text = "电脑胜利";
+            EndGame();
         }
         else if (movesCount == 9)
         {
-            gameStatusText.text = "It's a Draw!";
+            gameStatusText.text = "平局";
+            EndGame();
         }
         else
         {
             playerTurn = true;
-            gameStatusText.text = "Your Turn";
+            gameStatusText.text = "你的回合";
         }
+    }
+
+    void EndGame()
+    {
+        DisableButtons();
+        endGamePanel.SetActive(true);
+    }
+
+    public void RetryGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitGame()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     int FindBestMove()

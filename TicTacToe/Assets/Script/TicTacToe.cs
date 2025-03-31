@@ -9,6 +9,7 @@ public class TicTacToeAI : MonoBehaviour
     public TextMeshProUGUI gameStatusText;
     public GameObject choicePanel;
     public GameObject endGamePanel;
+    public GameObject pauseMenuPanel;
 
     private string playerSymbol;
     private string aiSymbol;
@@ -19,8 +20,17 @@ public class TicTacToeAI : MonoBehaviour
     {
         choicePanel.SetActive(true);
         endGamePanel.SetActive(false);
+        pauseMenuPanel.SetActive(false);
         foreach (var button in buttons)
             button.interactable = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePauseMenu();
+        }
     }
 
     public void PlayerChoosesSymbol(string symbol)
@@ -66,12 +76,12 @@ public class TicTacToeAI : MonoBehaviour
         if (CheckWin(playerSymbol))
         {
             gameStatusText.text = "你赢了！";
-            EndGame();
+            Invoke("EndGame", 1f);
         }
         else if (movesCount == 9)
         {
             gameStatusText.text = "平局";
-            EndGame();
+            Invoke("EndGame", 1f);
         }
         else
         {
@@ -103,12 +113,12 @@ public class TicTacToeAI : MonoBehaviour
         if (CheckWin(aiSymbol))
         {
             gameStatusText.text = "电脑胜利";
-            EndGame();
+            Invoke("EndGame", 1f);
         }
         else if (movesCount == 9)
         {
             gameStatusText.text = "平局";
-            EndGame();
+            Invoke("EndGame", 1f);
         }
         else
         {
@@ -131,6 +141,21 @@ public class TicTacToeAI : MonoBehaviour
     public void QuitGame()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void TogglePauseMenu()
+    {
+        pauseMenuPanel.SetActive(!pauseMenuPanel.activeSelf);
+    }
+
+    public void ResumeGame()
+    {
+        pauseMenuPanel.SetActive(false);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     int FindBestMove()

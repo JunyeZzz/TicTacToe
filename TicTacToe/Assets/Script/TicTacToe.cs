@@ -10,6 +10,7 @@ public class TicTacToeAI : MonoBehaviour
     public GameObject choicePanel;
     public GameObject endGamePanel;
     public GameObject pauseMenuPanel;
+    public AudioSource moveSFX;
 
     private string playerSymbol;
     private string aiSymbol;
@@ -23,7 +24,16 @@ public class TicTacToeAI : MonoBehaviour
         pauseMenuPanel.SetActive(false);
         foreach (var button in buttons)
             button.interactable = false;
+
+        // Set Audio volume from saved settings
+        float savedVolume = PlayerPrefs.GetFloat("SFXVolume", 1f);
+        moveSFX.volume = savedVolume;
+
+        // Preload audio to avoid lag
+        moveSFX.Play();
+        moveSFX.Stop();
     }
+
 
     private void Update()
     {
@@ -71,6 +81,7 @@ public class TicTacToeAI : MonoBehaviour
 
         buttons[index].GetComponentInChildren<TextMeshProUGUI>().text = playerSymbol;
         buttons[index].interactable = false;
+        moveSFX.Play();
         movesCount++;
 
         if (CheckWin(playerSymbol))
@@ -108,6 +119,7 @@ public class TicTacToeAI : MonoBehaviour
     {
         buttons[move].GetComponentInChildren<TextMeshProUGUI>().text = aiSymbol;
         buttons[move].interactable = false;
+        moveSFX.Play();
         movesCount++;
 
         if (CheckWin(aiSymbol))

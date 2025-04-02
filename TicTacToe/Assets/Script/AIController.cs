@@ -18,7 +18,7 @@ public class AIController : MonoBehaviour
     }
 
 
-    // 获取当前棋盘上 AI 的最优解
+    // 复杂AI，获取当前棋盘上 AI 的最优解
     public int FindBestMove(Button[] buttons, string aiSymbol, string playerSymbol)
     {
         int bestScore = int.MinValue;
@@ -72,6 +72,26 @@ public class AIController : MonoBehaviour
             }
         }
         return bestScore;
+    }
+
+    // 简单AI：随机选择一个可用的位置
+    public int GetRandomMove(Button[] buttons)
+    {
+        System.Collections.Generic.List<int> availableMoves = new System.Collections.Generic.List<int>();
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if (buttons[i].interactable)
+            {
+                availableMoves.Add(i);
+            }
+        }
+
+        if (availableMoves.Count == 0)
+            return 0; // 兜底处理
+
+        int randomIndex = Random.Range(0, availableMoves.Count);
+        return availableMoves[randomIndex];
     }
 
     // 检查胜利

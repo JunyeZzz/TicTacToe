@@ -5,8 +5,9 @@ using UnityEngine.UI;
 // 主菜单脚本，包含开始游戏、设置音效音量和退出游戏功能
 public class MainMenu : MonoBehaviour
 {
-    public GameObject settingsPanel;   // 设置面板对象
-    public Slider sfxVolumeSlider;     // 控制音效音量的滑动条
+    public GameObject settingsPanel; // 设置面板对象
+    public GameObject aiDifficultyPanel; // 难度选择面板
+    public Slider sfxVolumeSlider; // 控制音效音量的滑动条
 
     // 初始化主菜单时，加载并应用已保存的音量设置
     void Start()
@@ -16,9 +17,23 @@ public class MainMenu : MonoBehaviour
         AudioListener.volume = savedVolume;                        // 应用音量设置
     }
 
-    // "开始游戏" 按钮调用，加载游戏场景
-    public void PlayGame()
+    // 人机对战按钮点击，打开难度选择面板
+    public void OpenAIDifficultyPanel()
     {
+        aiDifficultyPanel.SetActive(true);
+    }
+
+    // 选择简单AI，保存设置并进入游戏
+    public void PlayEasyMode()
+    {
+        PlayerPrefs.SetInt("AI_EASY", 1);
+        SceneManager.LoadScene("Game");
+    }
+
+    // 选择困难AI，保存设置并进入游戏
+    public void PlayHardMode()
+    {
+        PlayerPrefs.SetInt("AI_EASY", 0);
         SceneManager.LoadScene("Game");
     }
 

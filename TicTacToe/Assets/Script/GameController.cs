@@ -7,7 +7,7 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
     public Button[] buttons;                   // 游戏棋盘上的按钮数组
-    public TextMeshProUGUI gameStatusText;     // 显示游戏状态的文本（回合信息和游戏结果）
+    public TextMeshProUGUI gameStatusText;     // 显示游戏状态的文本
     public GameObject choicePanel;             // 玩家选择先后手（X或O）的面板
     public GameObject endGamePanel;            // 游戏结束后的面板（重玩/退出）
     public AudioSource moveSFX;                // 移动音效
@@ -16,8 +16,9 @@ public class GameController : MonoBehaviour
     private string aiSymbol;                   // AI使用的符号（与玩家相反）
     private int movesCount = 0;                // 当前已进行的回合数
     private bool playerTurn;                   // 是否为玩家回合
+    private bool easyMode = false;             // 是否使用简单AI
 
-    private AIController aiController;         // 引用AI控制器脚本
+    private AIController aiController;
 
     // 游戏初始化
     private void Start()
@@ -33,6 +34,9 @@ public class GameController : MonoBehaviour
 
         moveSFX.Play();
         moveSFX.Stop();
+
+        // 读取主菜单中设置的AI难度
+        easyMode = PlayerPrefs.GetInt("AI_EASY", 0) == 1;
     }
 
     // 玩家选择符号（X或O）
@@ -61,10 +65,8 @@ public class GameController : MonoBehaviour
 
         if (!playerTurn)
             Invoke("AIFirstTurn", 0.5f);
-
     }
 
-    // 玩家回合
     void PlayerMove(int index)
     {
         if (!playerTurn || !buttons[index].interactable) return;
@@ -92,40 +94,20 @@ public class GameController : MonoBehaviour
         }
     }
 
-    // AI回合
-    void AIMove()
-    {
-        int move = aiController.FindBestMove(buttons, aiSymbol, playerSymbol);
-        buttons[move].GetComponentInChildren<TextMeshProUGUI>().text = aiSymbol;
-        buttons[move].interactable = false;
-        moveSFX.Play();
-        movesCount++;
-
-        if (aiController.CheckWin(buttons, aiSymbol))
-        {
-            gameStatusText.text = "电脑胜利";
-            Invoke("EndGame", 1f);
-        }
-        else if (movesCount == 9)
-        {
-            gameStatusText.text = "平局";
-            Invoke("EndGame", 1f);
-        }
-        else
-        {
-            playerTurn = true;
-            gameStatusText.text = "你的回合";
-        }
-    }
-
-    // AI 首回合，调用 AI 控制器获取快速开局落点
     void AIFirstTurn()
     {
         int move = aiController.GetFirstSmartMove(buttons, aiSymbol, playerSymbol);
         AIMoveAt(move);
     }
-    
-    // 执行指定位置的AI移动（用于首回合）
+
+    void AIMove()
+    {
+        int move = easyMode
+            ? aiController.GetRandomMove(buttons) // 简单AI逻辑
+            : aiController.FindBestMove(buttons, aiSymbol, playerSymbol); // 高级AI
+        AIMoveAt(move);
+    }
+
     void AIMoveAt(int index)
     {
         buttons[index].GetComponentInChildren<TextMeshProUGUI>().text = aiSymbol;
@@ -150,7 +132,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    // 游戏结束处理，显示结束面板
     void EndGame()
     {
         foreach (var button in buttons)
@@ -158,13 +139,11 @@ public class GameController : MonoBehaviour
         endGamePanel.SetActive(true);
     }
 
-    // 再来一局
     public void RetryGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    // 返回主菜单
     public void QuitGame()
     {
         SceneManager.LoadScene("MainMenu");

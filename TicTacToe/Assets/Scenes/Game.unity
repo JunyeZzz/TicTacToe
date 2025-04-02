@@ -915,8 +915,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 348107775}
-        m_TargetAssemblyTypeName: TicTacToeAI, Assembly-CSharp
+      - m_Target: {fileID: 348107777}
+        m_TargetAssemblyTypeName: PauseMenuController, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
@@ -975,6 +975,8 @@ GameObject:
   m_Component:
   - component: {fileID: 348107776}
   - component: {fileID: 348107775}
+  - component: {fileID: 348107777}
+  - component: {fileID: 348107778}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1007,7 +1009,6 @@ MonoBehaviour:
   gameStatusText: {fileID: 335905205}
   choicePanel: {fileID: 153698711}
   endGamePanel: {fileID: 1948385030}
-  pauseMenuPanel: {fileID: 508728590}
   moveSFX: {fileID: 2074739706}
 --- !u!4 &348107776
 Transform:
@@ -1024,6 +1025,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &348107777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348107774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad3903354cefd242a4ac647947e65eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuPanel: {fileID: 508728590}
+--- !u!114 &348107778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348107774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cb0788560e447945971808bc63f7e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &508728590
 GameObject:
   m_ObjectHideFlags: 0
@@ -3721,8 +3747,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 348107775}
-        m_TargetAssemblyTypeName: TicTacToeAI, Assembly-CSharp
+      - m_Target: {fileID: 348107777}
+        m_TargetAssemblyTypeName: PauseMenuController, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
@@ -5313,8 +5339,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 348107775}
-        m_TargetAssemblyTypeName: TicTacToeAI, Assembly-CSharp
+      - m_Target: {fileID: 348107777}
+        m_TargetAssemblyTypeName: PauseMenuController, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:

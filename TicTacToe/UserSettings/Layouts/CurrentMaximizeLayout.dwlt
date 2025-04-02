@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 3301
+  controlID: 3775
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 3257
+  controlID: 3731
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 3248
+  controlID: 3722
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -241,7 +241,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: fab5ffffe0f0ffff72f5ffff1afbffffa86e0000e27600006c7f0000a87f0000
+      m_ExpandedIDs: 2496fffffab5ffffe0f0ffff72f5ffff1afbffffa86e0000e27600006c7f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -988,7 +988,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -996,15 +996,15 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Script
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: F:\Github\TicTacToe\TicTacToe
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c2700000
-    m_LastClickedID: 28866
+    m_SelectedIDs: c0700000
+    m_LastClickedID: 28864
     m_ExpandedIDs: 00000000aa70000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1058,9 +1058,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: d2800000
-    m_LastClickedInstanceID: 32978
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: ca700000
+    m_LastClickedInstanceID: 28874
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000f65d00003e5e00002c5e00006e6c00003a710000267a000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1226,8 +1226,8 @@ MonoBehaviour:
     m_CachedPref: 308
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 32978
-  m_LastVerticalScrollValue: 425.3333
+  m_LastInspectedObjectInstanceID: 28874
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

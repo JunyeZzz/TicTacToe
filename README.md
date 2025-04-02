@@ -53,3 +53,7 @@
 - 添加存档功能。
 - 添加悔棋功能。
 
+
+## 📁 网络资源
+- 音效： Light Switch ON / OFF by FillSoko -- https://freesound.org/s/257958/ -- License: Creative Commons 0
+
